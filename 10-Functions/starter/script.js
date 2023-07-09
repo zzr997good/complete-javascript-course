@@ -35,30 +35,57 @@ const poll = {
   // This generates [0, 0, 0, 0]. More in the next section 😃
   answers: new Array(4).fill(0),
   registerNewAnswer() {
-    let input = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+    let input = Number(
+      prompt(
+        `${this.question}\n${this.options.join('\n')}\n(Write option number)`
+      )
+    );
     // while (input < 0 || input > 3) {
     //   input = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
     // }
-    // this.answers[input]++; 
+    // this.answers[input]++;
     // console.log(input);
     // console.log(typeof (input));
-    typeof (input) === 'number' && input >= 0 && input < this.answers.length && this.answers[input]++;
+    typeof input === 'number' &&
+      input >= 0 &&
+      input < this.answers.length &&
+      this.answers[input]++;
     this.displadisplayResultsy();
     this.displadisplayResultsy('string');
   },
-  displadisplayResultsy(type='array'){
-    if(type==='array') console.log(this.answers);
-    else if(type==='string') console.log(`Poll results are ${this.answers.join(', ')}`);
-  }
-}
+  displadisplayResultsy(type = 'array') {
+    if (type === 'array') console.log(this.answers);
+    else if (type === 'string')
+      console.log(`Poll results are ${this.answers.join(', ')}`);
+  },
+};
 
-document.querySelector('.poll').addEventListener('click',poll.registerNewAnswer.bind(poll));
+document
+  .querySelector('.poll')
+  .addEventListener('click', poll.registerNewAnswer.bind(poll));
 
+const array1 = [5, 2, 3];
+const array2 = [1, 5, 3, 9, 6, 1];
 
- const array1=[5, 2, 3]
- const array2=[1, 5, 3, 9, 6, 1]
+poll.displadisplayResultsy.call({ answers: array1 });
+const array2display = poll.displadisplayResultsy.bind({ answers: array2 });
+array2display('string');
 
- poll.displadisplayResultsy.call({answers:array1
- });
- const array2display=poll.displadisplayResultsy.bind({answers:array2});
- array2display('string');
+/* 
+This is more of a thinking challenge than a coding challenge 🤓
+
+Take the IIFE below and at the end of the function, attach an event listener that changes the color of the selected h1 element ('header') to blue, each time the BODY element is clicked. Do NOT select the h1 element again!
+
+And now explain to YOURSELF (or someone around you) WHY this worked! Take all the time you need. Think about WHEN exactly the callback function is executed, and what that means for the variables involved in this example.
+
+GOOD LUCK 😀
+*/
+
+(function () {
+  const header = document.querySelector('h1');
+  header.style.color = 'red';
+
+  document.querySelector('body').addEventListener('click', function () {
+    header.style.color = 'blue';
+  });
+})();
