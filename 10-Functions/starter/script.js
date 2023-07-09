@@ -29,5 +29,36 @@ BONUS TEST DATA 2: [1, 5, 3, 9, 6, 1]
 
 GOOD LUCK 😀
 */
+const poll = {
+  question: 'What is your favourite programming language?',
+  options: ['0: JavaScript', '1: Python', '2: Rust', '3: C++'],
+  // This generates [0, 0, 0, 0]. More in the next section 😃
+  answers: new Array(4).fill(0),
+  registerNewAnswer() {
+    let input = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+    // while (input < 0 || input > 3) {
+    //   input = Number(prompt(`${this.question}\n${this.options.join('\n')}\n(Write option number)`));
+    // }
+    // this.answers[input]++; 
+    // console.log(input);
+    // console.log(typeof (input));
+    typeof (input) === 'number' && input >= 0 && input < this.answers.length && this.answers[input]++;
+    this.displadisplayResultsy();
+    this.displadisplayResultsy('string');
+  },
+  displadisplayResultsy(type='array'){
+    if(type==='array') console.log(this.answers);
+    else if(type==='string') console.log(`Poll results are ${this.answers.join(', ')}`);
+  }
+}
 
-function registerNewAnswer() {}
+document.querySelector('.poll').addEventListener('click',poll.registerNewAnswer.bind(poll));
+
+
+ const array1=[5, 2, 3]
+ const array2=[1, 5, 3, 9, 6, 1]
+
+ poll.displadisplayResultsy.call({answers:array1
+ });
+ const array2display=poll.displadisplayResultsy.bind({answers:array2});
+ array2display('string');
